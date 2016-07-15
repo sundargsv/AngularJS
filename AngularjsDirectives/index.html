@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-init="quantity=1;price=5;names=['Jani','Hege','Kai'];employees=[{name:'Sundar',salary:'27,000 INR'},{name:'Nish',salary:'27,000 INR'}]">
+
+	<h2>Data Binding</h2>
+
+	Quantity: <input type="number" ng-model="quantity">
+	Price: <input type="number" ng-model="price">
+
+	<p><b>Total in dollar:</b> {{quantity * price}}</p>
+
+	<br><br><hr>
+
+	<h4>Repeating HTML Elements</h4>
+
+	<p>Looping with ng-repeat:</p>
+  	<ul>
+	    <li ng-repeat="i in names">
+	      {{ i }}
+	    </li>
+  	</ul>
+
+  	<h4>Repeating HTML Elements (Array of Objects)</h4>
+
+	<p>Looping with ng-repeat:</p>
+  	<ul>
+	    <li ng-repeat="emp in employees">
+	      {{ 'The employee name is ' + emp.name + ' and the salary is ' + emp.salary }}
+	    </li>
+  	</ul>
+
+  	<h4>User - Directives</h4>
+  	<w3-test-directive></w3-test-directive>
+
+  	<h4>User - Directives With Restricts</h4>
+  	<p>Element &nbsp;</p><w3-test1-directive></w3-test1-directive>
+	<p>Attribute &nbsp;</p><div w3-test1-directive></div>
+</div>
+
+<h2><b>Notes</b></h2>
+<ul>
+	<li>* The {{ quantity * price }} expression, in the example above, is an AngularJS data binding expression.</li>
+
+	<li>* The ng-repeat directive repeats an HTML element</li>
+
+	<li>* The ng-repeat directive actually clones HTML elements once for each item in a collection.</li>
+
+	<li>* The directive name is "w3TestDirective", but the Tag/ Element name is "w3-test-directive"</li>
+
+	<li>* We can also invoke directive by Attribute, Class, Comment &lt;div w3-test-directive&gt; &lt;/div&gt;
+		&lt;div class="w3-test-directive"&gt; &lt;/div&gt;
+	</li>
+
+	<li>* You can restrict your directives to only be invoked by some of the methods.</li>
+
+	<li>* By default the value is EA, meaning that both Element names and attribute names can invoke the directive.</li>
+
+
+
+</ul>
+
+<script>
+	var app = angular.module("myApp", []);
+	app.directive("w3TestDirective", function() {
+	    return {
+	        template : "<p>Made by a directive!</p>"
+	    };
+	});
+
+	app.directive("w3Test1Directive", function() {
+	    return {
+	        restrict : "A",
+	        template : "<span><b>Made by a directive with restrict!<b></span>"
+	    };
+	});
+</script>
+
+</body>
+</html>
