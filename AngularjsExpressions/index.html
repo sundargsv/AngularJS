@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<p>Change the value of the input field:</p>
+<h2>AngularJS Expressions</h2>
+<div ng-app="" ng-init="myCol='lightblue';amount=100;quantity=2;firstName='Sundar';lastName='GSV';employee={name:'sundar',salary:'27,000 INR'};points=[1,15,19,2,40]">
+
+	<input style="background-color:{{myCol}}" ng-model="myCol" value="{{myCol}}">
+
+	<br><br><hr>
+
+	<div>
+		<h4>AngularJS Numbers and Strings</h4>
+		<p>Total Amount (Using Expression {{}}): {{ amount * quantity}} </p>
+		<p>Total Amount (Using ng-bind): <span ng-bind="amount * quantity"></span> </p>
+		<p>Full Name (Using Expression {{}}): {{firstName + "" + lastName}}</p>
+		<p>Full Name (Using ng-bind): <span ng-bind="firstName + '' + lastName"></span></p>
+	</div>
+
+	<br><br><hr>
+
+	<div>
+		<h4>AngularJS objects</h4>
+		<input type="text" value="{{employee.name}}" readonly="true">	
+		<input type="text" value="{{employee.salary}}" readonly="true">
+		<p>The Employee is : <span ng-bind="employee.name"></span></p>
+	</div>
+
+	<br><br><hr>
+
+	<div>
+		<h4>AngularJS arrays</h4>
+		<p>The Points for index 2 and 3 is : <span ng-bind="points[2]"></span>&nbsp; and &nbsp;<span ng-bind="points[3]"></span></p>
+	</div>
+
+
+
+</div>
+
+
+<p>AngularJS expression with Strings, Number and returns the result.</p>
+<h2><b>Notes</b></h2>
+<ul>
+	<li>* ng-init is to initialize</li><br>
+	<li>* AngularJS objects are like JavaScript objects</li><br>
+		<ul>
+			<li>* input type="text" ng-bind="employee.name" - This will not work</li>
+		</ul><br>
+	<li>* AngularJS Expressions vs. JavaScript Expressions</li><br>
+		<ul>
+			<li>* Like JavaScript expressions, AngularJS expressions can contain literals, operators, and variables.
+
+			</li><br>
+			<li>* Unlike JavaScript expressions, AngularJS expressions can be written inside HTML.
+
+			</li><br>
+			<li>* AngularJS expressions do not support conditionals, loops, and exceptions, while JavaScript expressions do.
+
+			</li><br>
+
+			<li>* AngularJS expressions support filters, while JavaScript expressions do not.
+
+			</li><br>
+		</ul>
+</ul>
+<div>
+	
+
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<h2>AngularJS Modules</h2>
+
+<div ng-app="myApp" ng-controller="myFullNameCtrl">
+	<p>FullName : {{ firstName + " " + lastName }}</p>
+
+	<br>
+	<h4>Multiple controllers</h4>
+	<div ng-controller="myEmpDetailsCtrl">
+		<p>Employee Name : {{name}}</p>
+		<p>Employee Salary : {{salary}}</p>
+	</div>
+
+	<br>
+	<h4>Adding a Directive</h4>
+	<div>
+		<p w3-test-directive></p>
+	</div>
+</div>
+<hr/>
+
+<h2><b>Notes</b></h2>
+<ul>
+	<li>  1. An AngularJS module defines an application.<br>
+
+		  2. The module is a container for the different parts of an application.<br>
+
+		  3. The module is a container for the application controllers.<br>
+
+		  4. Controllers always belong to a module.</li>
+
+	<li> A module is created by using the AngularJS function angular.module</li>
+	<li> The "myApp" parameter refers to an HTML element in which the application will run.</li>
+	<li> Add a controller to your application, and refer to the controller with the ng-controller directive:
+
+	</li>
+	<li>
+		<ul>
+			<li> var app = angular.module("myApp", []);</li>
+			<li> The [] parameter in the module definition can be used to define dependent modules.
+			</li>
+			<li> Without the [] parameter, you are not creating a new module, but retrieving an existing one.
+			</li>
+		</ul>
+	</li>
+	<li>
+		<ul>
+			<li>When to Load the Library
+				While it is common in HTML applications to place scripts at the end of the <body> element, it is recommended that you load the AngularJS library either in the <head> or at the start of the <body>.
+
+				This is because calls to angular.module can only be compiled after the library has been loaded.
+			</li>
+		</ul>
+	</li>
+</ul>
+<script>
+	var app = angular.module("myApp", []);
+	app.controller("myFullNameCtrl", function($scope) {
+	    $scope.firstName = "Sundar";
+	    $scope.lastName = "GSV";
+	});
+
+	app.directive("w3TestDirective", function() {
+	    return {
+	        template : "This is made of custom directive constructor!"
+	    };
+	});
+</script>
+<script src="js/myEmpDetailsCtrl.js"></script>
+
+
+</body>
+</html>
+
