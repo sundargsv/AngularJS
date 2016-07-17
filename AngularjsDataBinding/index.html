@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+	<h4>HTML View</h4>
+    <span>First name (Using ng-bind)</span><p ng-bind="firstname"></p>
+    <p>First name (Using {{}}): {{firstname}}</p>
+
+    <hr>
+    <h4>The ng-model Directive</h4>
+    <input ng-model="fullName">
+
+    <hr>
+    <h4>Two-way Binding</h4>
+    Enter Your FullName : <input ng-model="fullName">
+    <p>And see the change here :) {{fullName}}</p>
+
+    <hr>
+    <h4>AngularJS Controller</h4>
+    <h1 ng-click="changeName()">{{changingName}}</h1>
+
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.firstname = "John";
+    $scope.lastname = "Doe";
+    $scope.fullName = "Your FullNames";
+    $scope.changingName = "One";
+    $scope.changeName = function(){
+
+    	if($scope.changingName == "One"){
+    		$scope.changingName = "Two";
+    	}else{
+    		$scope.changingName = "One";
+    	}
+
+    }
+
+});
+</script>
+
+<h2><b>Notes</b></h2>
+<ul>
+	<li>* The HTML container where the AngularJS application is displayed, is called the view.
+	</li>
+
+	<li>* The view has access to the model, and there are several ways of displaying model data in the view.
+			<ul>
+				<li>* Here the model is "firstName and  lastName"</li>
+				<li>* You can use the ng-bind directive, which will bind the innerHTML of the element to the specified model property
+				</li>
+
+				<li>* You can also use double braces {{ }} to display content from the model</li>
+			</ul>
+	</li>
+	<li>* you can use the ng-model directive on HTML controls to bind the model to the view.
+	</li>
+
+	<li>* Use the ng-model directive to bind data from the model to the view on HTML controls(input, select, textarea)
+	</li>
+	<li>* Data binding in AngularJS is the synchronization between the model and the view.</li>
+
+	<li>* When data in the model changes, the view reflects the change, and when data in the view changes, the model is updated as well. This happens immediately and automatically, which makes sure that the model and the view is updated at all times.
+
+	</li>
+
+
+</ul>
+
+</body>
+</html>
+

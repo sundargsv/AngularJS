@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body ng-app="myApp">
+
+<div  ng-controller="myCtrl">
+
+	<h4>AngularJS Scope</h4>
+	<h1>{{carname}}</h1>
+	<br>
+	<p>The property "carname" was made in the controller, and can be referred to in the view by using the {{ }} brackets</p>
+	<hr/>
+
+	<h4>Understanding the Scope</h4>
+	<input ng-model="name">
+	<h1>My name is {{name}}</h1>
+	<p>If you make changes in the view, the model and the controller will be updated</p>
+	<hr/>
+
+	<h4>Know Your Scope</h4>
+
+	<p>In the two examples above there is only one scope, so knowing your scope is not an issue, but for larger applications there can be sections in the HTML DOM which can only access certain scopes.
+	</p><br>
+
+	<p>When dealing with the ng-repeat directive, each repetition has access to the current repetition object</p>
+
+	<ul>
+    	<li ng-repeat="x in names">{{x}}</li>
+	</ul>
+	<p>Each &lt;li&gt; element has access to the current repetition object, in this case a string, which is referred to by using x.</p>
+	<hr/>
+
+	<h4>Root Scope / currentScope color</h4>
+	<p>{{color}}</p>
+	<hr/>
+
+</div>
+
+<h4>Root Scope / rootScope color</h4>
+<p>{{color}}</p>
+
+<script>
+
+	var app = angular.module('myApp', []);
+
+	app.controller('myCtrl', function($scope) {
+		//currentScope
+	    $scope.carname = "Volvo";
+	    $scope.name = "Sundar GSV";
+	    $scope.names = ["sundar", "Mr Angular 1", "Mr Angular 2"];
+	    $scope.color = "currentScope color";
+	});
+
+	app.run(function($rootScope) {
+		//The rootScope is available in the entire application.
+    	$rootScope.color = 'rootScope color';
+	});
+</script>
+
+
+<h2><b>Notes</b></h2>
+<ul>
+
+	<li>* The scope is the binding part between the HTML (view) and the JavaScript (controller)</li>
+	<li>* The scope is an object with the available properties and methods.</li>
+	<li>* The scope is available for both the view and the controller.</li>
+	<li>* When you make a controller in AngularJS, you pass the $scope object as an argument</li>
+	<li>* When adding properties to the $scope object in the controller, the view (HTML) gets access to these properties.</li>
+	<li>* In the view, you do not use the prefix $scope, you just refer to a propertyname, like {{carname}}.</li>
+</ul>
+
+
+
+</body>
+</html>
+

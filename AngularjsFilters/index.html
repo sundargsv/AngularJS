@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="commmonCtrl">
+
+	<h4>Adding Filters to Expressions</h4>
+	<p><b>The name is {{ lastName | uppercase }}</b></p>
+	
+	<p>Filters can be added to expressions by using the pipe character |, followed by a filter.</p>
+	<hr/>
+
+	<div ng-controller="namesCtrl">
+		<h4>Adding Filters to Directives</h4>
+		<p>The orderBy filter sorts an array</p>
+		<p>Looping with objects:</p>
+		<ul>
+		  <li ng-repeat="x in names | orderBy:'country'">
+		    {{ x.name + ', ' + x.country }}
+		  </li>
+		</ul>
+		<br>
+		<p>Filters are added to directives, like ng-repeat, by using the pipe character |, followed by a filter
+		</p>
+		<hr/>
+	</div>
+
+	<h4>The currency Filter</h4>
+	<p>The currency filter formats a number as currency</p>
+	<p>Price: {{ price | currency }}</p>
+	<hr/>
+
+	<div ng-controller="namesCtrl">
+		<h4>The filter Filter</h4>
+		<p>The filter filter selects a subset of an array or an property (array) from an object (say employee)</p>
+		<ul>
+			<li ng-repeat="x in names | filter : 'i'">
+		    {{ x.name }}
+		  	</li>
+		</ul>
+		<br>
+		<p>The filter filter can only be used on arrays, and it returns an array containing only the matching items.
+		</p>
+	</div>
+
+	<div ng-controller="namesCtrl">
+		<h4>Filter an Array Based on User Input</h4>
+		<p>Type a letter in the input field:</p>
+		<p><input type="text" ng-model="test"></p>
+		<ul>
+		  <li ng-repeat="x in names | filter:test">
+		    {{ x.name }}
+		  </li>
+		</ul>
+	</div>
+
+	<div ng-controller="namesCtrl">
+		<h4>Filter an Array Based on User Input <b>(Using ng-click)</b></h4>
+		<table border="1" width="50%">
+		  <tr>
+		    <th ng-click="orderByMe('name')">Name</th>
+		    <th ng-click="orderByMe('country')">Country</th>
+		  </tr>
+		  <tr ng-repeat="x in names | orderBy:myOrderBy">
+		    <td>{{x.name}}</td>
+		    <td>{{x.country}}</td>
+		  </tr>
+		</table>
+		<br>
+		<p>By adding the ng-click directive on the table headers, we can run a function that changes the sorting order of the array</p>
+	</div>
+
+	<div ng-controller="customFilterCtrl">
+		<ul>
+			<li ng-repeat="x in names">
+    			{{x | myFormat}}
+			</li>
+		</ul>
+		<p>The myFormat filter will format every other character to uppercase.</p>
+	</div>
+
+</div>
+
+<script>
+
+	var app = angular.module('myApp',[]);
+	//personCtrl
+	app.controller('commmonCtrl', function($scope) {
+	    $scope.firstName = "Sundar",
+	    $scope.lastName = "Gsv"
+	    $scope.price    = 100;
+	});
+
+	//namesCtrl
+	app.controller('namesCtrl', function($scope) {
+    $scope.names = [
+        {name:'Jani',country:'Norway'},
+        {name:'Carl',country:'Sweden'},
+        {name:'Margareth',country:'England'},
+        {name:'Hege',country:'Norway'},
+        {name:'Joe',country:'Denmark'},
+        {name:'Gustav',country:'Sweden'},
+        {name:'Birgit',country:'Denmark'},
+        {name:'Mary',country:'England'},
+        {name:'Kai',country:'Norway'}
+        ];
+
+        $scope.orderByMe = function(x) {
+    		$scope.myOrderBy = x;
+  		}
+	});
+
+	app.filter('myFormat', function() {
+	    return function(x) {
+	        var i, c, txt = "";
+	        for (i = 0; i < x.length; i++) {
+	            c = x[i];
+	            if (i % 2 == 0) {
+	                c = c.toUpperCase();
+	            }
+	            txt += c;
+	        }
+	        return txt;
+	    };
+	});
+
+	app.controller('customFilterCtrl', function($scope) {
+	    $scope.names = [
+	        'Jani',
+	        'Carl',
+	        'Margareth',
+	        'Hege',
+	        'Joe',
+	        'Gustav',
+	        'Birgit',
+	        'Mary',
+	        'Kai'
+	        ];
+	});
+
+	
+</script>
+
+<h2><b>Notes</b></h2>
+
+<ul>
+	<li>* Filters can be added in AngularJS to format data.</li>
+	<li>
+		<ul>
+			<li><code>currency</code> Format a number to a currency format.</li>
+			<li><code>date</code> Format a date to a specified format.</li>
+			<li><code>filter</code> Select a subset of items from an array.</li>
+			<li><code>json</code> Format an object to a JSON string.</li>
+			<li><code>limitTo</code> Limits an array/string, into a specified number of elements/characters.</li>
+			<li><code>lowercase</code> Format a string to lower case.</li>
+			<li><code>number</code> Format a number to a string.</li>
+			<li><code>orderBy</code> Orders an array by an expression.</li>
+			<li><code>uppercase</code> Format a string to upper case.</li>
+
+		</ul>
+	</li>
+	<li>* The uppercase filter format strings to upper case</li>
+	<li>* The lowercase filter format strings to lower case</li>
+</ul>
+
+</body>
+</html>
